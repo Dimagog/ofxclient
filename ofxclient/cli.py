@@ -7,6 +7,7 @@ import logging
 import os
 import os.path
 import sys
+import time
 
 from ofxhome import OFXHome
 
@@ -216,6 +217,8 @@ def login_check_menu(bank_info, args):
             print("authentication failed: %s" % e)
             continue
 
+        print('Sleeping')
+        time.sleep(2)
         accounts = i.accounts()
         for a in accounts:
             GlobalConfig.add_account(a)

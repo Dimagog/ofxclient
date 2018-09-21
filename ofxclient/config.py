@@ -1,12 +1,10 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import with_statement
-try:
-    # python 3
-    from configparser import ConfigParser
-except ImportError:
-    # python 2
-    from ConfigParser import ConfigParser
+
+# python 2
+from ConfigParser import ConfigParser
+
 try:
     import keyring
     keyring.get_password('is-backend', 'configured?')
@@ -120,6 +118,8 @@ class SecurableConfigParser(ConfigParser):
         as secure."""
         if not value:
             value = '!!False!!'
+        else:
+            value = str(value)
         if self.is_secure_option(section, option):
             self.set_secure(section, option, value)
         else:
